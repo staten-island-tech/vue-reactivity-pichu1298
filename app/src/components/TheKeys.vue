@@ -13,17 +13,22 @@ import { ref } from 'vue'
 
 let xValue = ref(0)
 let yValue = ref(0)
+let movementCount = ref(0)
 function XLocationLeft() {
   xValue.value--
+  movementCount++
 }
 function XLocationRight() {
   xValue.value++
+  movementCount++
 }
 function YLocationUp() {
   yValue.value++
+  movementCount++
 }
 function YLocationDown() {
   yValue.value--
+  movementCount++
 }
 
 //scoped fixes CssStyleConfllicts.
