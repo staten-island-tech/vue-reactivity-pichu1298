@@ -1,34 +1,41 @@
 <template>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
-    <div
-      v-for="item in shoppingItems"
-      :key="item.name"
-      class="bg-white shadow-lg rounded-2xl p-4 transition-transform transform hover:scale-105 border border-gray-200"
-    >
-      <h1 class="text-xl font-bold text-gray-800">{{ item.name }}</h1>
-      <img :src="item.imageUrl" alt="" class="w-full h-48 object-cover rounded-lg mt-2" />
-      <p class="text-gray-600 mt-2">{{ item.description }}</p>
-
-      <div class="mt-4 flex flex-col gap-3">
-        <input
-          v-model.number="item.quantity"
-          type="number"
-          min="1"
-          placeholder="Enter quantity"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
-        <button
-          @click="addToCart"
-          type="submit"
-          class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-all"
+  <div class="flex justify-between p-6">
+    <!-- Shopping Items (Left Side - 2/3 width) -->
+    <div class="w-2/3 pr-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div
+          v-for="item in shoppingItems"
+          :key="item.name"
+          class="bg-white shadow-lg rounded-2xl p-4 transition-transform transform hover:scale-105 border border-gray-200"
         >
-          Add to Cart (${{ (item.price * (item.quantity || 1)).toFixed(2) }})
-        </button>
+          <h1 class="text-xl font-bold text-gray-800">{{ item.name }}</h1>
+          <img :src="item.imageUrl" alt="" class="w-full h-48 object-cover rounded-lg mt-2" />
+          <p class="text-gray-600 mt-2">{{ item.description }}</p>
+
+          <div class="mt-4 flex flex-col gap-3">
+            <input
+              v-model.number="item.quantity"
+              type="number"
+              min="1"
+              placeholder="Enter quantity"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+            <button
+              @click="addToCart(item)"
+              type="submit"
+              class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-all"
+            >
+              Add to Cart (${{ (item.price * (item.quantity || 1)).toFixed(2) }})
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div>
-    <ShoppingCart :items="currentItems" />
+
+    <!-- Shopping Cart (Right Side - 1/3 width) -->
+    <div class="w-1/3 bg-gray-50 p-4 border-l border-gray-300 rounded-lg">
+      <ShoppingCart :items="currentItems.items" />
+    </div>
   </div>
 </template>
 
@@ -36,22 +43,24 @@
 import { ref } from 'vue'
 import { reactive } from 'vue'
 import ShoppingCart from './ShoppingCart.vue'
-let currentItems = reactive([])
+let currentItems = reactive({ items: [], totalCost: 0 })
 function addToCart(item) {
-  const existingItem = currentItems.find((cartItem) => cartItem.name === item.name)
+  const existingItem = currentItems.items.find((cartItem) => cartItem.name === item.name)
 
   if (!existingItem) {
-    // If item is not in cart, add it
-    currentItems.push({
+    currentItems.items.push({
       name: item.name,
       price: item.price,
       quantity: item.quantity,
     })
   } else {
-    // If item already exists, update quantity and total price
     existingItem.quantity += item.quantity
     existingItem.price += item.price * item.quantity
   }
+  console.log(currentItems)
+  currentItems.totalCost = currentItems.items.forEach((item) => {
+    currentItems.totalCost += item.price
+  })
 }
 
 const shoppingItems = ref([
