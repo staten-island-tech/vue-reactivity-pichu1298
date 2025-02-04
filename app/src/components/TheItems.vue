@@ -34,7 +34,7 @@
 
     <!-- Shopping Cart (Right Side - 1/3 width) -->
     <div class="w-1/3 bg-gray-50 p-4 border-l border-gray-300 rounded-lg">
-      <ShoppingCart :items="currentItems.items" />
+      <ShoppingCart :items="currentItems.items" :totalCost="currentItems.totalCost" />
     </div>
   </div>
 </template>
@@ -43,6 +43,7 @@
 import { ref } from 'vue'
 import { reactive } from 'vue'
 import ShoppingCart from './ShoppingCart.vue'
+import RemoveButtonItems from './RemoveButtonItems.vue'
 let currentItems = reactive({ items: [], totalCost: 0 })
 function addToCart(item) {
   const existingItem = currentItems.items.find((cartItem) => cartItem.name === item.name)
@@ -51,16 +52,19 @@ function addToCart(item) {
     currentItems.items.push({
       name: item.name,
       price: item.price,
+      totalPrice: item.price * item.quantity,
       quantity: item.quantity,
     })
   } else {
     existingItem.quantity += item.quantity
-    existingItem.price += item.price * item.quantity
+    existingItem.totalPrice += item.quantity * item.price
   }
+  currentItems.totalCost = currentItems.items.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0,
+  )
+
   console.log(currentItems)
-  currentItems.totalCost = currentItems.items.forEach((item) => {
-    currentItems.totalCost += item.price
-  })
 }
 
 const shoppingItems = ref([

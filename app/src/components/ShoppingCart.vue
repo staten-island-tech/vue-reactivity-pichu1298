@@ -4,17 +4,21 @@
 
     <div v-if="items.length > 0">
       <div
-        v-for="item in currentItems.items"
+        v-for="item in items"
         :key="item.name"
         class="flex justify-between items-center bg-gray-100 p-4 mb-2 rounded-lg shadow-sm"
       >
         <div>
           <h2 class="text-lg font-semibold text-gray-700">{{ item.name }}</h2>
           <p class="text-sm text-gray-500">Price: ${{ item.price.toFixed(2) }}</p>
+          <p class="text-sm text-gray-500">
+            Total Cost of {{ item.name }}: ${{ item.totalPrice.toFixed(2) }}
+          </p>
         </div>
         <span class="text-blue-600 font-semibold">x{{ item.quantity }}</span>
       </div>
-      <h3>Total Cost: ${{ currentItems.totalCost.toFixed(2) }}</h3>
+      <h3>Total Cost: ${{ totalCost.toFixed(2) }}</h3>
+      <RemoveButtonItems />
     </div>
 
     <p v-else class="text-gray-500 text-center">Your cart is empty.</p>
@@ -22,9 +26,14 @@
 </template>
 
 <script setup>
+import RemoveButtonItems from './RemoveButtonItems.vue'
 defineProps({
-  currentItems: {
-    type: Object,
+  items: {
+    type: Array,
+    required: true,
+  },
+  totalCost: {
+    type: Number,
     required: true,
   },
 })
