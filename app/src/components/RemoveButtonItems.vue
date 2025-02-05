@@ -1,24 +1,30 @@
 <template>
-  <div>
-    <input type="number" placeholder="amount" v-model="amount" />
-    <button type="submit" @click="RemoveItem(amount, item.id)">Remove</button>
+  <div class="flex items-center gap-3">
+    <input
+      type="number"
+      min="1"
+      v-model.number="removeAmount"
+      class="w-16 px-2 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
+    />
+    <button
+      @click="removeItem(removeAmount)"
+      class="bg-red-500 text-white font-semibold px-3 py-1 rounded-lg hover:bg-red-600 transition-all"
+    >
+      Remove
+    </button>
   </div>
 </template>
 
 <script setup>
 import { defineProps, defineEmits } from 'vue'
 
-let cart = defineProps({
-  items: {
-    type: Array,
-    required: true,
-  },
-  totalCost: {
-    type: Number,
-    required: true,
-  },
+let props = defineProps({
+  itemId: Number, // Receives the item's ID
 })
-function RemoveItem(amount, item) {}
-</script>
 
-<style scoped></style>
+let emit = defineEmits(['remove-item']) // Sends event to ShoppingCart.vue
+
+function removeItem(removeAmount) {
+  emit('remove-item', props.itemId, removeAmount) // Sends itemId to the parent (ShoppingCart.vue)
+}
+</script>

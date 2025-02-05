@@ -13,12 +13,12 @@
           <p class="text-sm text-gray-500">Price: ${{ item.price.toFixed(2) }}</p>
           <p class="text-sm text-gray-500">
             Total Cost of {{ item.name }}: ${{ item.totalPrice.toFixed(2) }}
+            <RemoveButtonItems :itemId="item.id" @remove-item="removeFromCart(id, removeAmount)" />
           </p>
         </div>
         <span class="text-blue-600 font-semibold">x{{ item.quantity }}</span>
       </div>
       <h3>Total Cost: ${{ totalCost.toFixed(2) }}</h3>
-      <RemoveButtonItems />
     </div>
 
     <p v-else class="text-gray-500 text-center">Your cart is empty.</p>
@@ -27,7 +27,7 @@
 
 <script setup>
 import RemoveButtonItems from './RemoveButtonItems.vue'
-defineProps({
+const props = defineProps({
   items: {
     type: Array,
     required: true,
@@ -37,6 +37,12 @@ defineProps({
     required: true,
   },
 })
+
+const emit = defineEmits(['remove-item']) // Sends event up to TheItems.vue
+
+function removeFromCart(id, removeAmount) {
+  emit('remove-item', id, removeAmount) // Pass the event to TheItems.vue
+}
 </script>
 
 <style scoped></style>

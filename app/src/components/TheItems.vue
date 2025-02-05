@@ -34,7 +34,11 @@
 
     <!-- Shopping Cart (Right Side - 1/3 width) -->
     <div class="w-1/3 bg-gray-50 p-4 border-l border-gray-300 rounded-lg">
-      <ShoppingCart :items="currentItems.items" :totalCost="currentItems.totalCost" />
+      <ShoppingCart
+        :items="currentItems.items"
+        :totalCost="currentItems.totalCost"
+        @remove-item="removeItemFromCart"
+      />
     </div>
   </div>
 </template>
@@ -43,7 +47,6 @@
 import { ref } from 'vue'
 import { reactive } from 'vue'
 import ShoppingCart from './ShoppingCart.vue'
-import RemoveButtonItems from './RemoveButtonItems.vue'
 let currentItems = reactive({ items: [], totalCost: 0 })
 function addToCart(item) {
   const existingItem = currentItems.items.find((cartItem) => cartItem.name === item.name)
@@ -66,7 +69,11 @@ function addToCart(item) {
 
   console.log(currentItems)
 }
-
+function removeItemFromCart(id, removeAmount) {
+  console.log(id)
+  //if the removeAmount is greater than the id of the item then remove all the items.
+  //else, if it is less than or equal to the id, remove by item.quantity by the amount.
+}
 const shoppingItems = ref([
   {
     name: 'Apples',
