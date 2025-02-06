@@ -1,27 +1,37 @@
 <template>
-  <div class="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-    <h1 class="text-2xl font-bold text-gray-800 border-b pb-2 mb-4">🛒 Your Cart</h1>
+  <div class="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-10">
+    <h1 class="text-4xl font-extrabold text-gray-800 border-b pb-4 mb-8 text-center">
+      🛒 Your Cart
+    </h1>
 
     <div v-if="items.length > 0">
       <div
         v-for="item in items"
         :key="item.name"
-        class="flex justify-between items-center bg-gray-100 p-4 mb-2 rounded-lg shadow-sm"
+        class="flex flex-col sm:flex-row justify-between items-center bg-gray-50 p-6 mb-6 rounded-xl shadow-md transition-all hover:shadow-xl"
       >
-        <div>
-          <h2 class="text-lg font-semibold text-gray-700">{{ item.name }}</h2>
-          <p class="text-sm text-gray-500">Price: ${{ item.price.toFixed(2) }}</p>
-          <p class="text-sm text-gray-500">
+        <div class="flex-1">
+          <h2 class="text-2xl font-semibold text-gray-700">{{ item.name }}</h2>
+          <p class="text-base text-gray-500">Price: ${{ item.price.toFixed(2) }}</p>
+          <p class="text-sm text-gray-400">
             Total Cost of {{ item.name }}: ${{ item.totalPrice.toFixed(2) }}
-            <RemoveButtonItems :itemId="item.id" @remove-item="removeFromCart(id, removeAmount)" />
           </p>
         </div>
-        <span class="text-blue-600 font-semibold">x{{ item.quantity }}</span>
+
+        <div class="flex items-center space-x-6 mt-4 sm:mt-0">
+          <span class="text-xl text-gray-600 font-semibold">x{{ item.quantity }}</span>
+          <RemoveButtonItems :itemId="item.name" @remove-item="removeFromCart" />
+        </div>
       </div>
-      <h3>Total Cost: ${{ totalCost.toFixed(2) }}</h3>
+
+      <div class="mt-8 text-right">
+        <h3 class="text-2xl font-semibold text-gray-800">
+          Total Cost: ${{ totalCost.toFixed(2) }}
+        </h3>
+      </div>
     </div>
 
-    <p v-else class="text-gray-500 text-center">Your cart is empty.</p>
+    <p v-else class="text-gray-500 text-center text-lg">Your cart is empty.</p>
   </div>
 </template>
 
@@ -41,6 +51,7 @@ const props = defineProps({
 const emit = defineEmits(['remove-item']) // Sends event up to TheItems.vue
 
 function removeFromCart(id, removeAmount) {
+  console.log('remove-item', id, removeAmount)
   emit('remove-item', id, removeAmount) // Pass the event to TheItems.vue
 }
 </script>
