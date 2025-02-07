@@ -28,6 +28,7 @@
         <h3 class="text-2xl font-semibold text-gray-800">
           Total Cost: ${{ totalCost.toFixed(2) }}
         </h3>
+        <CheckOut @check-out="checkOut" />
       </div>
     </div>
 
@@ -37,6 +38,7 @@
 
 <script setup>
 import RemoveButtonItems from './RemoveButtonItems.vue'
+import CheckOut from './CheckOut.vue'
 const props = defineProps({
   items: {
     type: Array,
@@ -48,7 +50,11 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['remove-item']) // Sends event up to TheItems.vue
+const emit = defineEmits(['remove-item'], ['check-out']) // Sends event up to TheItems.vue
+
+function checkOut() {
+  emit('check-out')
+}
 
 function removeFromCart(id, removeAmount) {
   console.log('remove-item', id, removeAmount)

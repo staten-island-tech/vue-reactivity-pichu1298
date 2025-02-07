@@ -1,10 +1,10 @@
 <template>
-  <div class="flex items-center gap-3 space-x-3">
+  <div class="flex items-center gap-3 space-x-3 w-full">
     <input
       type="number"
       min="1"
       v-model.number="removeAmount"
-      class="w-20 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 text-gray-700"
+      class="w-16 sm:w-20 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 text-gray-700"
     />
     <button
       @click="removeItem"

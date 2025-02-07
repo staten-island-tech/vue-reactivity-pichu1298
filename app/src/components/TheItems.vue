@@ -163,28 +163,32 @@ const shoppingItems = ref([
   {
     name: 'Laundry Detergent',
     description: 'Powerful liquid detergent for clean and fresh-smelling clothes.',
-    imageUrl: '',
+    imageUrl:
+      'https://www.thespruce.com/thmb/pmfCoOzxFR7anVPz7zzpHlp0N3E=/3000x3000/filters:no_upscale():max_bytes(150000):strip_icc()/gainlaundrydetergent-465c56fd9cb64b98938c953f9aa1371c.jpeg',
     price: 10.99,
     quantity: 1,
   },
   {
     name: 'Coffee',
     description: 'Rich and aromatic ground coffee, perfect for your morning brew.',
-    imageUrl: '',
+    imageUrl:
+      'https://th.bing.com/th/id/R.ee280908b6bfabb36b2331ca9bc74bba?rik=LWYtJCdXRGgD7w&riu=http%3a%2f%2fupload.wikimedia.org%2fwikipedia%2fcommons%2f0%2f0c%2fCoffee_time_(2410222127).jpg&ehk=02vR0%2f4hvYSxrYpiplY8EkDo49xkRLDplmKFADkjgZc%3d&risl=&pid=ImgRaw&r=0',
     price: 8.99,
     quantity: 1,
   },
   {
     name: 'Cereal',
     description: 'Crunchy and delicious breakfast cereal with whole grains.',
-    imageUrl: '',
+    imageUrl:
+      'https://i5.walmartimages.com/asr/e3597292-a7ba-429e-ac27-0f91c80e916b.ac0621fbeca841ba772e993a5721229f.jpeg',
     price: 4.59,
     quantity: 1,
   },
   {
     name: 'Cheese',
     description: 'A block of sharp cheddar cheese, great for sandwiches or snacks.',
-    imageUrl: '',
+    imageUrl:
+      'https://th.bing.com/th/id/R.ad02987b2d8e8a1dd265ce8c95e54292?rik=fzco4RMvxKotWA&riu=http%3a%2f%2fdeliciousfoodandwine.com%2fwp-content%2fuploads%2f2015%2f03%2fDollarphotoclub_53674521.jpg&ehk=awS5zy%2bK64%2fPQsQldskF7Cp3Ksatb0UpybU1elwlpXU%3d&risl=&pid=ImgRaw&r=0',
     price: 5.79,
     quantity: 1,
   },
