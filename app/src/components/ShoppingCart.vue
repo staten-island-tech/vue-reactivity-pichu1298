@@ -1,6 +1,8 @@
 <template>
-  <div class="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-10">
-    <h1 class="text-4xl font-extrabold text-gray-800 border-b pb-4 mb-8 text-center">
+  <div
+    class="fixed flex-col top-20 bottom-20 right-0 overflow-y-auto w-1/3 mx-auto p-8 bg-white shadow-lg rounded-lg mt-10"
+  >
+    <h1 class="w-full text-4xl font-extrabold text-gray-800 border-b pb-4 mb-8 text-center">
       🛒 Your Cart
     </h1>
 
@@ -23,16 +25,14 @@
           <RemoveButtonItems :itemId="item.name" @remove-item="removeFromCart" />
         </div>
       </div>
-
-      <div class="mt-8 text-right">
-        <h3 class="text-2xl font-semibold text-gray-800">
-          Total Cost: ${{ totalCost.toFixed(2) }}
-        </h3>
-        <CheckOut @check-out="checkOut" />
-      </div>
     </div>
-
     <p v-else class="text-gray-500 text-center text-lg">Your cart is empty.</p>
+  </div>
+  <div
+    v-if="items.length > 0"
+    class="fixed bottom-10 right-10 text-right p-8 bg-white shadow-lg rounded-lg z-10"
+  >
+    <h3 class="text-2xl font-semibold text-gray-800">Total Cost: ${{ totalCost.toFixed(2) }}</h3>
   </div>
 </template>
 
@@ -50,7 +50,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['remove-item'], ['check-out']) // Sends event up to TheItems.vue
+const emit = defineEmits(['remove-item']) // Sends event up to TheItems.vue
 
 function checkOut() {
   emit('check-out')

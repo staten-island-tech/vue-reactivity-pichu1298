@@ -1,15 +1,7 @@
 <template>
-  <div>
-    <button @click="checkedOut">Check Out</button>
-  </div>
+  <div></div>
 </template>
 
-<script setup>
-import { emit } from 'vue'
-let emit = defineEmits(['check-out'])
-function checkedOut() {
-  emit('check-out')
-}
-</script>
+<script setup></script>
 
 <style scoped></style>
