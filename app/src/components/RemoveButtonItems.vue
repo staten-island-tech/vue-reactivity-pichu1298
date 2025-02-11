@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center gap-3 space-x-3 w-full">
+  <div class="flex flex-wrap items-center justify-center gap-3 w-full">
     <input
       type="number"
       min="1"
@@ -8,7 +8,7 @@
     />
     <button
       @click="removeItem"
-      class="bg-red-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-red-700 transition-all ease-in-out duration-300"
+      class="bg-red-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-red-700 transition-all ease-in-out duration-300 w-[200%]"
     >
       Remove
     </button>
