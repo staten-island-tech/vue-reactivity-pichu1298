@@ -14,36 +14,37 @@
       <div
         v-for="item in items"
         :key="item.name"
-        class="flex flex-col sm:flex-row justify-between items-center bg-gray-50 p-6 mb-6 rounded-xl shadow-md transition-all hover:shadow-xl"
+        class="flex flex-col items-center bg-gray-50 p-6 mb-6 rounded-xl shadow-md transition-all hover:shadow-xl text-center"
       >
-        <div class="flex-1 w-full">
-          <!-- Item Name (larger font size) -->
-          <h2 class="w-full font-semibold text-gray-700 text-xl sm:text-2xl md:text-3xl">
-            {{ item.name }}
-          </h2>
-
-          <!-- Item Price (adjusted larger font size) -->
-          <p class="text-base sm:text-lg md:text-xl text-gray-500">
-            Price: ${{ item.price.toFixed(2) }}
-          </p>
-
-          <!-- Total Cost of Item (slightly larger) -->
-          <p class="text-sm sm:text-base md:text-lg text-gray-400">
-            Total Cost of {{ item.name }}: ${{ item.totalPrice.toFixed(2) }}
-          </p>
-
-          <div class="flex flex-wrap items-center gap-4 mt-4 sm:mt-0">
-            <!-- Item Quantity (larger font) -->
+        <div class="w-full">
+          <!-- Item Name and Quantity (Aligned Side by Side) -->
+          <div class="flex items-center justify-center gap-2 w-full">
+            <h2 class="font-semibold text-gray-700 text-xl sm:text-2xl md:text-3xl text-center">
+              {{ item.name }}
+            </h2>
             <span class="text-lg sm:text-xl md:text-2xl text-gray-600 font-semibold">
               x{{ item.quantity }}
             </span>
+          </div>
+
+          <!-- Item Price (Centered) -->
+          <p class="text-base sm:text-lg md:text-xl text-gray-500 text-center">
+            Price: ${{ item.price.toFixed(2) }}
+          </p>
+
+          <!-- Total Cost of Item (Centered) -->
+          <p class="text-sm sm:text-base md:text-lg text-gray-400 text-center">
+            Total Cost of {{ item.name }}: ${{ item.totalPrice.toFixed(2) }}
+          </p>
+
+          <div class="flex justify-center items-center gap-4 mt-4">
             <RemoveButtonItems :itemId="item.name" @remove-item="removeFromCart" />
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Empty Cart Message (adjusted size) -->
+    <!-- Empty Cart Message -->
     <p v-else class="text-gray-500 text-center text-lg sm:text-xl md:text-2xl">
       Your cart is empty.
     </p>
@@ -54,9 +55,9 @@
     v-if="items.length > 0"
     class="fixed bottom-[5%] right-[0%] top-[85%] left-[70%] text-right p-8 bg-white shadow-lg rounded-lg z-10 w-[30%]"
   >
-    <!-- Total Cost Header (larger size for total cost) -->
+    <!-- Total Cost Header -->
     <h3
-      class="w-full font-semibold text-gray-800 text-right text-sm sm:text-2xl md:text-2xl lg:text-4xl"
+      class="w-full font-semibold text-gray-800 text-center text-sm sm:text-2xl md:text-2xl lg:text-xl"
     >
       Total Cost: ${{ totalCost.toFixed(2) }}
     </h3>
