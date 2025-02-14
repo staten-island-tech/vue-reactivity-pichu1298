@@ -66,7 +66,6 @@
 
 <script setup>
 import RemoveButtonItems from './RemoveButtonItems.vue'
-import CheckOut from './CheckOut.vue'
 const props = defineProps({
   items: {
     type: Array,
